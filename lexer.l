@@ -40,6 +40,7 @@ STRING    \"{print}*\"
 "else"|"ELSE"         { return ELSE; }
 "while"|"WHILE"       { return WHILE; }
 "for"|"FOR"           { return FOR; }
+"do"|"DO"			  { return DO; }
 "continue"|"CONTINUE" { return CONTINUE; }
 "break"|"BREAK"       { return BREAK; }
 "void"|"VOID"         { return VOID; }

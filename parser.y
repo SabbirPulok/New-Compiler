@@ -21,7 +21,7 @@
  
 }
 
-%token<int_val> CHAR INT FLOAT DOUBLE IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN PRINT
+%token<int_val> CHAR INT FLOAT DOUBLE IF ELSE DO WHILE FOR CONTINUE BREAK VOID RETURN PRINT
 %token<int_val> ADDOP MULOP DIVOP INCR OROP ANDOP NOTOP EQUOP NEQUOP LT GT GTE LTE
 %token<int_val> LPAREN RPAREN LBRACK RBRACK LBRACE RBRACE SEMI DOT COMMA ASSIGN REFER APOSTOPH
 %token <id> ID
@@ -51,7 +51,17 @@ program: {gen_code(START,-1);} statements {gen_code(HALT,-1);};
 
 statements: statements statement | ;
 
-statement: ID ASSIGN expression tail 
+statement: assign_incr
+    | INCR ID SEMI;
+    | declarations
+    | if_statement
+    | for_statement
+    | while_statement
+    | do_while_statement
+    | print_statement
+;
+tail: SEMI | ;
+assign_incr: ID ASSIGN expression tail 
     {
         list_t* l=search($1->st_name);
         //printf("%s %d\n",$1->st_name, $1->st_type);
@@ -94,17 +104,10 @@ statement: ID ASSIGN expression tail
         }
 
 	}
-    | INCR ID SEMI;
-    | declarations
-    | if_statement
-    | for_statement
-    | while_statement
-    | print_statement
-;
-tail: SEMI | ;
+
 print_statement : PRINT LPAREN ID RPAREN SEMI
 {
-    ;
+    
 
     //printf("PRINT\n\nNAME: %s Address: %d\n\n", search($3->st_name)->st_name, search($3->st_name)->address);
     gen_code(WRITE_INT,search($3->st_name)->address);
@@ -118,10 +121,11 @@ optional_else:
                 |
                 ;
  
-for_statement: FOR LPAREN statement {gen_code(LABEL,5);}expression SEMI{ gen_code(JMP_FALSE,6); } statement RPAREN LBRACE statements {gen_code(GOTO,5);} RBRACE {gen_code(LABEL,6);};
+for_statement: FOR LPAREN statement {gen_code(LABEL,5);}expression { gen_code(JMP_FALSE,6); } RPAREN LBRACE statements {gen_code(GOTO,5);} RBRACE {gen_code(LABEL,6);};
 
 while_statement: WHILE {gen_code(LABEL,1);} LPAREN expression RPAREN {gen_code(JMP_FALSE,2);} LBRACE statements {gen_code(GOTO,1);}RBRACE {gen_code(LABEL,2);} 
 
+do_while_statement: DO {gen_code(LABEL,7);}LBRACE statements RBRACE WHILE LPAREN expression {gen_code(JMP_FALSE,8);}RPAREN {gen_code(GOTO,7);} SEMI {gen_code(LABEL,8);};
 
 declarations: declarations declaration | ;
 
@@ -132,6 +136,8 @@ declaration: INT ID SEMI
                 if(l==NULL)
                 {
                     insert($2->st_name, strlen($2->st_name), INT_TYPE);
+                    $2->address = address-1;
+                    gen_code(STORE, address-1);
                 }
                 else
                 {
@@ -272,9 +278,12 @@ expression:
          gen_code(LTN, -1);
      }
     | expression GT expression
-    | expression LTE expression
-    | expression GTE expression    
-    | LPAREN expression RPAREN |
+    {
+        gen_code(GTN,-1);
+    }
+    | expression LTE expression { gen_code(LTEN,-1); }
+    | expression GTE expression { gen_code(GTEN,-1);}   
+    | LPAREN expression RPAREN { $$=$2;}|
     sign constant { $$=$2;} |
 	ID 
     {

@@ -1,6 +1,6 @@
-enum code_ops {START,HALT, LD_INT_VALUE, STORE, WRITE_INT, LD_VAR, ADD, SUB, MUL, DIV, LD_INT, LTN,EQN, JMP_FALSE, GOTO, LABEL};
+enum code_ops {START,HALT, LD_INT_VALUE, STORE, WRITE_INT, LD_VAR, ADD, SUB, MUL, DIV, LD_INT, LTN,GTN,LTEN,GTEN, EQN, JMP_FALSE, GOTO, LABEL};
 
-char *op_name[] = {"start", "halt", "ld_int_value", "store", "write_int", "ld_var", "add", "sub","mul","div","ld_int","lt","eqn","jmp_false","goto","label"};
+char *op_name[] = {"start", "halt", "ld_int_value", "store", "write_int", "ld_var", "add", "sub","mul","div","ld_int","lt","gtn","lten","gten","eqn","jmp_false","goto","label"};
 
 struct instruction
 {
@@ -137,6 +137,34 @@ void print_assembly()
                             printf("\n");
                             break;
 
+            case LTEN        :  
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $a0, 0($sp)\n");
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $t1, 0($sp)\n");
+                            printf("sle $a0,$t1,$a0\n");
+                            printf("addiu $sp, $sp, 16\n");
+                            printf("\n");
+                            break;
+             case GTN       :  
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $a0, 0($sp)\n");
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $t1, 0($sp)\n");
+                            printf("sgt $a0,$t1,$a0\n");
+                            printf("addiu $sp, $sp, 16\n");
+                            printf("\n");
+                            break;
+
+            case GTEN        :  
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $a0, 0($sp)\n");
+                            printf("addiu $sp, $sp, -16\n");
+                            printf("lw $t1, 0($sp)\n");
+                            printf("sge $a0,$t1,$a0\n");
+                            printf("addiu $sp, $sp, 16\n");
+                            printf("\n");
+                            break;
             case EQN        :  
                             printf("addiu $sp, $sp, -16\n");
                             printf("lw $a0, 0($sp)\n");
