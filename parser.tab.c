@@ -489,13 +489,13 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    50,    50,    50,    52,    52,    54,    77,    96,    97,
-      98,    99,   100,   101,   103,   103,   104,   111,   111,   111,
-     114,   114,   116,   117,   120,   120,   120,   120,   122,   122,
-     122,   122,   125,   125,   127,   133,   145,   152,   157,   162,
-     166,   188,   188,   188,   191,   204,   215,   228,   245,   246,
-     247,   248,   249,   254,   258,   259,   260,   261,   262,   263,
-     283,   283
+       0,    50,    50,    50,    52,    52,    54,    78,    97,    98,
+      99,   100,   101,   102,   104,   104,   105,   112,   112,   112,
+     115,   115,   117,   118,   121,   121,   121,   121,   123,   123,
+     123,   123,   126,   126,   128,   142,   161,   168,   173,   178,
+     182,   204,   204,   204,   207,   220,   231,   244,   261,   262,
+     263,   264,   265,   270,   274,   275,   276,   277,   278,   279,
+     299,   299
 };
 #endif
 
@@ -1399,24 +1399,25 @@ yyreduce:
         }
         else if(l->st_type==(yyvsp[-1].int_val)){
             printf("Valid assignment\n");
-        }
-        else{
-            printf("Wrong assignment,type missmatch\n");
-        }
-        address = search((yyvsp[-3].id)->st_name)->address;
+            address = search((yyvsp[-3].id)->st_name)->address;
             if(address!=-1){
 				  gen_code(STORE, address);
             }
               else {
 			  	exit(1);
               }
+        }
+        else{
+            printf("Wrong assignment,type missmatch\n");
+        }
+        
         
     }
-#line 1416 "parser.tab.c" /* yacc.c:1646  */
+#line 1417 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 78 "parser.y" /* yacc.c:1646  */
+#line 79 "parser.y" /* yacc.c:1646  */
     {  
 		list_t* l = search((yyvsp[-2].id)->st_name);
 
@@ -1435,156 +1436,171 @@ yyreduce:
         }
 
 	}
-#line 1439 "parser.tab.c" /* yacc.c:1646  */
+#line 1440 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 105 "parser.y" /* yacc.c:1646  */
+#line 106 "parser.y" /* yacc.c:1646  */
     {
     ;
 
     //printf("PRINT\n\nNAME: %s Address: %d\n\n", search($3->st_name)->st_name, search($3->st_name)->address);
     gen_code(WRITE_INT,search((yyvsp[-2].id)->st_name)->address);
 }
-#line 1450 "parser.tab.c" /* yacc.c:1646  */
+#line 1451 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 111 "parser.y" /* yacc.c:1646  */
+#line 112 "parser.y" /* yacc.c:1646  */
     {gen_code(JMP_FALSE,3);}
-#line 1456 "parser.tab.c" /* yacc.c:1646  */
+#line 1457 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 111 "parser.y" /* yacc.c:1646  */
+#line 112 "parser.y" /* yacc.c:1646  */
     {gen_code(GOTO,4);}
-#line 1462 "parser.tab.c" /* yacc.c:1646  */
+#line 1463 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 114 "parser.y" /* yacc.c:1646  */
+#line 115 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,3);}
-#line 1468 "parser.tab.c" /* yacc.c:1646  */
+#line 1469 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 114 "parser.y" /* yacc.c:1646  */
+#line 115 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,4);}
-#line 1474 "parser.tab.c" /* yacc.c:1646  */
+#line 1475 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 120 "parser.y" /* yacc.c:1646  */
+#line 121 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,5);}
-#line 1480 "parser.tab.c" /* yacc.c:1646  */
+#line 1481 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 120 "parser.y" /* yacc.c:1646  */
+#line 121 "parser.y" /* yacc.c:1646  */
     { gen_code(JMP_FALSE,6); }
-#line 1486 "parser.tab.c" /* yacc.c:1646  */
+#line 1487 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 120 "parser.y" /* yacc.c:1646  */
+#line 121 "parser.y" /* yacc.c:1646  */
     {gen_code(GOTO,5);}
-#line 1492 "parser.tab.c" /* yacc.c:1646  */
+#line 1493 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 120 "parser.y" /* yacc.c:1646  */
+#line 121 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,6);}
-#line 1498 "parser.tab.c" /* yacc.c:1646  */
+#line 1499 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 122 "parser.y" /* yacc.c:1646  */
+#line 123 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,1);}
-#line 1504 "parser.tab.c" /* yacc.c:1646  */
+#line 1505 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 122 "parser.y" /* yacc.c:1646  */
+#line 123 "parser.y" /* yacc.c:1646  */
     {gen_code(JMP_FALSE,2);}
-#line 1510 "parser.tab.c" /* yacc.c:1646  */
+#line 1511 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 122 "parser.y" /* yacc.c:1646  */
+#line 123 "parser.y" /* yacc.c:1646  */
     {gen_code(GOTO,1);}
-#line 1516 "parser.tab.c" /* yacc.c:1646  */
+#line 1517 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 122 "parser.y" /* yacc.c:1646  */
+#line 123 "parser.y" /* yacc.c:1646  */
     {gen_code(LABEL,2);}
-#line 1522 "parser.tab.c" /* yacc.c:1646  */
+#line 1523 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 128 "parser.y" /* yacc.c:1646  */
+#line 129 "parser.y" /* yacc.c:1646  */
     {
                   //$2 = (list_t*)malloc(sizeof(list_t));
-                   // if(search($2->st_name))
-				  insert((yyvsp[-1].id)->st_name, strlen((yyvsp[-1].id)->st_name), INT_TYPE);
+                list_t* l=search((yyvsp[-1].id)->st_name);
+                if(l==NULL)
+                {
+                    insert((yyvsp[-1].id)->st_name, strlen((yyvsp[-1].id)->st_name), INT_TYPE);
+                }
+                else
+                {
+                    printf("%s is already declared.Try with different names.\n",l->st_name);
+                }
+				  
 			  }
-#line 1532 "parser.tab.c" /* yacc.c:1646  */
+#line 1541 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 134 "parser.y" /* yacc.c:1646  */
+#line 143 "parser.y" /* yacc.c:1646  */
     {
-                  //$2 = (list_t*)malloc(sizeof(list_t));
-				  insert((yyvsp[-3].id)->st_name, strlen((yyvsp[-3].id)->st_name), INT_TYPE);
-                  
-
+                list_t* l=search((yyvsp[-3].id)->st_name);
+                if(l==NULL)
+                {
+                  insert((yyvsp[-3].id)->st_name, strlen((yyvsp[-3].id)->st_name), INT_TYPE);
                   gen_code(LD_INT_VALUE, (yyvsp[-1].int_val));
                   //list_t* l = search($2->st_name);
                   //printf("NNN: %d\n",address);
                   (yyvsp[-3].id)->address = address-1;
                   gen_code(STORE, address-1);
+                }
+                else
+                {
+                    printf("%s is already declared.Try with different names.\n",l->st_name);
+                }
+                  //$2 = (list_t*)malloc(sizeof(list_t));
+				  
 			  }
-#line 1548 "parser.tab.c" /* yacc.c:1646  */
+#line 1564 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 146 "parser.y" /* yacc.c:1646  */
+#line 162 "parser.y" /* yacc.c:1646  */
     {
                 //$2 = (list_t*)malloc(sizeof(list_t));
  
                 
                 insert((yyvsp[-1].id)->st_name, strlen((yyvsp[-1].id)->st_name), REAL_TYPE );
                }
-#line 1559 "parser.tab.c" /* yacc.c:1646  */
+#line 1575 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 153 "parser.y" /* yacc.c:1646  */
+#line 169 "parser.y" /* yacc.c:1646  */
     {
                   //$2 = (list_t*)malloc(sizeof(list_t));
 				  insert((yyvsp[-3].id)->st_name, strlen((yyvsp[-3].id)->st_name), INT_TYPE);
 			  }
-#line 1568 "parser.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 38:
-#line 158 "parser.y" /* yacc.c:1646  */
-    {
-                  printf("Type mismatch\n");
-			  }
-#line 1576 "parser.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 39:
-#line 163 "parser.y" /* yacc.c:1646  */
-    {
-                    insert((yyvsp[-3].id)->st_name, strlen((yyvsp[-3].id)->st_name), CHAR_TYPE);
-                }
 #line 1584 "parser.tab.c" /* yacc.c:1646  */
     break;
 
+  case 38:
+#line 174 "parser.y" /* yacc.c:1646  */
+    {
+                  printf("Type mismatch\n");
+			  }
+#line 1592 "parser.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 39:
+#line 179 "parser.y" /* yacc.c:1646  */
+    {
+                    insert((yyvsp[-3].id)->st_name, strlen((yyvsp[-3].id)->st_name), CHAR_TYPE);
+                }
+#line 1600 "parser.tab.c" /* yacc.c:1646  */
+    break;
+
   case 40:
-#line 167 "parser.y" /* yacc.c:1646  */
+#line 183 "parser.y" /* yacc.c:1646  */
     {
                   if((yyvsp[-1].int_val) == VOID)
                   {
@@ -1596,29 +1612,29 @@ yyreduce:
                     }
 				  
 			  }
-#line 1600 "parser.tab.c" /* yacc.c:1646  */
+#line 1616 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 188 "parser.y" /* yacc.c:1646  */
+#line 204 "parser.y" /* yacc.c:1646  */
     {(yyval.int_val)=INT_TYPE; gen_code(LD_INT,(yyvsp[0].int_val));}
-#line 1606 "parser.tab.c" /* yacc.c:1646  */
+#line 1622 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 188 "parser.y" /* yacc.c:1646  */
+#line 204 "parser.y" /* yacc.c:1646  */
     {(yyval.int_val)=REAL_TYPE;}
-#line 1612 "parser.tab.c" /* yacc.c:1646  */
+#line 1628 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 188 "parser.y" /* yacc.c:1646  */
+#line 204 "parser.y" /* yacc.c:1646  */
     {(yyval.int_val)=CHAR_TYPE;}
-#line 1618 "parser.tab.c" /* yacc.c:1646  */
+#line 1634 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 191 "parser.y" /* yacc.c:1646  */
+#line 207 "parser.y" /* yacc.c:1646  */
     {
          if((yyvsp[-2].int_val) == (yyvsp[0].int_val) && (yyvsp[-2].int_val)!=VOID && (yyvsp[0].int_val)!=VOID) 
          { 
@@ -1632,11 +1648,11 @@ yyreduce:
          } 
          
          }
-#line 1636 "parser.tab.c" /* yacc.c:1646  */
+#line 1652 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 204 "parser.y" /* yacc.c:1646  */
+#line 220 "parser.y" /* yacc.c:1646  */
     {
         if((yyvsp[-2].int_val) == (yyvsp[0].int_val) && (yyvsp[-2].int_val)!=VOID && (yyvsp[0].int_val)!=VOID) 
          { 
@@ -1648,11 +1664,11 @@ yyreduce:
               printf("Type Mismatch\n"); (yyval.int_val) = VOID; 
          } 
     }
-#line 1652 "parser.tab.c" /* yacc.c:1646  */
+#line 1668 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 216 "parser.y" /* yacc.c:1646  */
+#line 232 "parser.y" /* yacc.c:1646  */
     {
         if((yyvsp[-2].int_val) == (yyvsp[0].int_val) && (yyvsp[-2].int_val)!=VOID && (yyvsp[0].int_val)!=VOID) 
          { 
@@ -1664,11 +1680,11 @@ yyreduce:
               printf("Type Mismatch\n"); (yyval.int_val) = VOID; 
          } 
     }
-#line 1668 "parser.tab.c" /* yacc.c:1646  */
+#line 1684 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 228 "parser.y" /* yacc.c:1646  */
+#line 244 "parser.y" /* yacc.c:1646  */
     {
         list_t* l = search((yyvsp[-1].id)->st_name);
 
@@ -1686,33 +1702,33 @@ yyreduce:
             gen_code(STORE,l->address);
         }
     }
-#line 1690 "parser.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 52:
-#line 250 "parser.y" /* yacc.c:1646  */
-    {
-         gen_code(EQN, -1);
-    }
-#line 1698 "parser.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 53:
-#line 255 "parser.y" /* yacc.c:1646  */
-    {
-         gen_code(LTN, -1);
-     }
 #line 1706 "parser.tab.c" /* yacc.c:1646  */
     break;
 
+  case 52:
+#line 266 "parser.y" /* yacc.c:1646  */
+    {
+         gen_code(EQN, -1);
+    }
+#line 1714 "parser.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 53:
+#line 271 "parser.y" /* yacc.c:1646  */
+    {
+         gen_code(LTN, -1);
+     }
+#line 1722 "parser.tab.c" /* yacc.c:1646  */
+    break;
+
   case 58:
-#line 262 "parser.y" /* yacc.c:1646  */
+#line 278 "parser.y" /* yacc.c:1646  */
     { (yyval.int_val)=(yyvsp[0].int_val);}
-#line 1712 "parser.tab.c" /* yacc.c:1646  */
+#line 1728 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 264 "parser.y" /* yacc.c:1646  */
+#line 280 "parser.y" /* yacc.c:1646  */
     {
         list_t* l=search((yyvsp[0].id)->st_name);
         if(l == NULL)
@@ -1730,11 +1746,11 @@ yyreduce:
 
 
     }
-#line 1734 "parser.tab.c" /* yacc.c:1646  */
+#line 1750 "parser.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1738 "parser.tab.c" /* yacc.c:1646  */
+#line 1754 "parser.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1962,7 +1978,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 286 "parser.y" /* yacc.c:1906  */
+#line 302 "parser.y" /* yacc.c:1906  */
 
 
 void yyerror ()

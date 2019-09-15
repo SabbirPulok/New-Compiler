@@ -1,9 +1,9 @@
 inserting a in symtab and its address = 0
 inserting i in symtab and its address = 1
 inserting j in symtab and its address = 2
+j is already declared.Try with different names.
 Valid assignment
 j
-Comment at line 18
 Comment at line 19
 Comment at line 20
 Comment at line 21
@@ -13,7 +13,7 @@ Comment at line 24
 Comment at line 25
 Comment at line 26
 Comment at line 27
-Comment at line 29
+Comment at line 28
 Comment at line 30
 Comment at line 31
 Comment at line 32
@@ -22,6 +22,7 @@ Comment at line 34
 Comment at line 35
 Comment at line 36
 Comment at line 37
+Comment at line 38
 Parsing finished!
 
 -----------Sym Table------------

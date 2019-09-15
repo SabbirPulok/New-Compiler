@@ -1,6 +1,7 @@
 int a = 80;
 int i = 40;
 int j=10; 
+// int j=2;
     if(j<15)
     {
         for(j=10; j<15; j++)

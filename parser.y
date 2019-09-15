@@ -61,17 +61,18 @@ statement: ID ASSIGN expression tail
         }
         else if(l->st_type==$3){
             printf("Valid assignment\n");
-        }
-        else{
-            printf("Wrong assignment,type missmatch\n");
-        }
-        address = search($1->st_name)->address;
+            address = search($1->st_name)->address;
             if(address!=-1){
 				  gen_code(STORE, address);
             }
               else {
 			  	exit(1);
               }
+        }
+        else{
+            printf("Wrong assignment,type missmatch\n");
+        }
+        
         
     }
 	| ID INCR tail
@@ -127,20 +128,35 @@ declarations: declarations declaration | ;
 declaration: INT ID SEMI
 			  {
                   //$2 = (list_t*)malloc(sizeof(list_t));
-                   // if(search($2->st_name))
-				  insert($2->st_name, strlen($2->st_name), INT_TYPE);
+                list_t* l=search($2->st_name);
+                if(l==NULL)
+                {
+                    insert($2->st_name, strlen($2->st_name), INT_TYPE);
+                }
+                else
+                {
+                    printf("%s is already declared.Try with different names.\n",l->st_name);
+                }
+				  
 			  }
 			  | INT ID ASSIGN ICONST SEMI
 			  {
-                  //$2 = (list_t*)malloc(sizeof(list_t));
-				  insert($2->st_name, strlen($2->st_name), INT_TYPE);
-                  
-
+                list_t* l=search($2->st_name);
+                if(l==NULL)
+                {
+                  insert($2->st_name, strlen($2->st_name), INT_TYPE);
                   gen_code(LD_INT_VALUE, $4);
                   //list_t* l = search($2->st_name);
                   //printf("NNN: %d\n",address);
                   $2->address = address-1;
                   gen_code(STORE, address-1);
+                }
+                else
+                {
+                    printf("%s is already declared.Try with different names.\n",l->st_name);
+                }
+                  //$2 = (list_t*)malloc(sizeof(list_t));
+				  
 			  }
                 |FLOAT ID SEMI
                {
