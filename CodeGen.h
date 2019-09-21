@@ -45,7 +45,7 @@ void print_assembly()
                             printf(".text\n");
                             printf(".globl main\n");
                             printf("main:\n");
-                            printf("addiu $t7, $sp, 160\n");
+                            printf("addiu $t7, $sp, 480\n");
                             break;
 
             case HALT:

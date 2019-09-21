@@ -1,5 +1,22 @@
-int j;
-j=2;
+int i=10;
+int j=20;
+i=40;
+while(j<i)
+{
+    if(j==35)
+    {
+        Print(j);
+    }
+    else{
+        Print(j);
+    }
+    j++;
+}
+for(int c=0;c<20)
+{
+    Print(j);
+    c++;
+}
 
 // int j=2;
     //  if(j<15)
@@ -18,7 +35,7 @@ j=2;
         
         Print(j);
         j++;
-    }while(j<=5);
+    }while(j<=38);
     
 
 // while(i<a)
